@@ -1,0 +1,815 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>GraalOnline Era Image Uploader</title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<script src="/cdn-cgi/apps/head/XB8p13Xa0HBk0D60GHhta7K9hhw.js"></script><link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <style>
+		body {
+			background-image: url("background.jpg");
+            font-family: 'Roboto', sans-serif;
+		}
+        .ar {
+            direction: rtl;
+            text-align: right;
+        }
+        .ar button.close span {
+            display: none;
+        }
+        .uploads .form-check label.btn-graal {
+            text-align: left;
+            box-sizing: border-box;
+            width: 100%;
+        }
+        .uploads .form-check, .btn-group-fill {
+            box-sizing: border-box;
+            width: 100%;
+        }
+        .uploads {
+            margin-bottom: 16px;
+        }
+        a, a:visited { 
+            color: #5d9660;
+        }
+        a:hover {
+            color: #314e33;
+            text-decoration: none;
+        }
+        .uploads .btn-graal {
+            color: #4d4d4d;
+            background-color: white;
+            border-color: #737373;
+        }
+        .uploads .active {
+            color: #fff;
+            background-color: #737373;
+            border-color: #737373;
+        }
+        .uploads .active:hover {
+            color: #fff;
+            background-color: #4d4d4d;
+            border-color: #4d4d4d;
+        }
+        .uploads label {
+            line-height: 2;
+            padding-left: 7px;
+            padding-right: 7px;
+        }
+        .tw {
+            width: 100px;
+        }
+        .sl {
+            padding-top: 8px;
+        }
+        .gr {
+            width: 59.781px;
+            text-align: center;
+            display: block;
+            padding-bottom: 6px;
+            font-style: italic;
+            font-size: 12px;
+            margin-right: 2px;
+            line-height: 1;
+            height: 30px;
+        }
+        .grg {
+            width: 61.781px;
+            text-align: center;
+            font-size: 12px;
+            display: block;
+            padding-bottom: 6px;
+            margin-right: 4px;
+            font-style: italic;
+            line-height: 1;
+            height: 30px;
+        }
+        .btn img {
+            margin-top: -2px;
+            padding-bottom: 2px;
+        }
+        .btn-graal {
+            color: #fff;
+            background-color: #737373;
+            border-color: #737373;
+        }
+        .btn-graal img {
+            padding-top: 6px;
+            text-align: center;
+        }
+        .btn-graal:hover {
+            color: #fff;
+            background-color: #4d4d4d;
+            border-color: #4d4d4d;
+        }
+        .btn.focus {
+            box-shadow: none;
+        }
+        .formbg {
+            padding-top: 12px;
+            border-radius: 4px;
+            background-color: rgba(255,255,255,0.88);
+        }
+        @media (max-width: 576px) {
+            .formbg {
+                border-radius: 0;
+            }
+        }
+        .dropdown {
+            float: right;
+            position: relative;
+        }
+        .ar .dropdown {
+            float: left;
+        }
+		.fa {
+		    color: #737373;
+		}
+	</style>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12 col-sm-10 offset-sm-1 col-md-6 offset-md-3 mt-4 mb-4 formbg">
+                <div class="dropdown">
+                  <button class="btn btn-sm btn-graal dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span id="curlang">English</span>
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" data-lang="en" href="#">English</a>
+                    <a class="dropdown-item" data-lang="fr" href="#">Français</a>
+                    <a class="dropdown-item" data-lang="de" href="#">Deutsch</a>
+                    <a class="dropdown-item" data-lang="es" href="#">Español</a>
+                    <a class="dropdown-item" data-lang="pt" href="#">Português</a>
+                    <a class="dropdown-item" data-lang="tr" href="#">Türkçe</a>
+                    <a class="dropdown-item ar" data-lang="ar" href="#">العربية</a>
+                    <a class="dropdown-item" data-lang="ms" href="#">Bahasa Melayu</a>
+                  </div>
+                </div>
+				<h3 data-i18n="header">GraalOnline Era Image Uploader</h3>
+                
+				<form action="https://eraupload.graalonline.com/upload-new.gs" method="post" enctype="multipart/form-data">
+                    <div class="form-row mt-3">
+                        <div class="form-group col-12">
+                            <label data-i18n="account_info" for="email">Enter your account information</label>
+                            <a href="#findaccount" data-toggle="modal" data-target="#findaccount"><i class="fa fa-info-circle fa-color" aria-hidden="true"></i></a>
+                            <input type="text" class="form-control" name="email" id="email" placeholder="Graal ID">
+                        </div>
+                    </div>
+                    <div class="form-row mt-3">
+                        <div class="form-group col-12">
+                            <label data-i18n="upload_code">Enter your upload code</label>
+                            <a href="#uploadcode" data-toggle="modal" data-target="#uploadcode"><i class="fa fa-info-circle fa-color" aria-hidden="true"></i></a>
+                            <input type="text" class="form-control" name="uploadcode" placeholder="Upload Code">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-12">
+                            <span data-i18n="select_upload">Select an upload type</span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col">
+                            <div class="button-spacing uploads btn-group-toggle playerupload" data-toggle="buttons">
+                                <input type="hidden" name="type" id="type" value="head" />
+                                <label class="btn btn-graal mr-1 mt-2 active" for="head">
+                                    <img src="https://classiccachecloud.quattroplay.com/images4/dcicon_menu_head0.png" />
+                                    <input type="radio" id="head" name="type2" value="head" checked="on"><br/><span data-i18n="[html]head" id="headcost" class="gr">Head</span>
+                                </label>
+                                <label class="btn btn-graal mr-1 mt-2" for="body">
+                                    <img src="https://classiccachecloud.quattroplay.com/images4/dcicon_menu_body0.png" />
+                                    <input type="radio" id="body" name="type2" value="body"><br/><span data-i18n="[html]body" id="bodycost" class="gr">Body</span>
+                                </label>
+                                <label class="btn btn-graal mr-1 mt-2" for="shield">
+                                    <img src="https://classiccachecloud.quattroplay.com/images4/dcicon_menu_shield0.png" />
+                                    <input type="radio" id="shield" name="type2" value="shield"><br/><span data-i18n="[html]shield" class="gr pcost">Shield</span>
+                                </label>
+                                <label class="btn btn-graal mr-1 mt-2 d-none" for="sword">
+                                    <img src="https://classiccachecloud.quattroplay.com/images4/dcicon_menu_sword0.png" />
+                                    <input type="radio" id="sword" name="type2" value="sword"><br/><span data-i18n="[html]sword" class="gr pcost">Sword</span>
+                                </label>
+                                <label class="btn btn-graal mr-1 mt-2" for="ganglogo">
+                                    <img src="https://classiccachecloud.quattroplay.com/images4/dcicon_menu_logos0.png" />
+                                    <input type="radio" id="ganglogo" name="type2" value="ganglogo"><br/><span data-i18n="[html]ganglogo" class="grg">Gang Logo</span>
+                                </label>
+                                <label class="btn btn-graal mr-1 mt-2 d-none" for="guild_hat">
+                                    <img src="https://classiccachecloud.quattroplay.com/images4/dcicon_menu_hat0.png" />
+                                    <input type="radio" id="guild_hat" name="type2" value="guild_hat"><br/><span data-i18n="[html]guild_hat" class="grg">Guild Hat</span>
+                                </label>
+                                <label class="btn btn-graal mr-1 mt-2 d-none" for="guild_acc">
+                                    <img src="https://classiccachecloud.quattroplay.com/images4/dcicon_menu_accessory2.png" />
+                                    <input type="radio" id="guild_acc" name="type2" value="guild_acc"><br/><span data-i18n="[html]guild_acc" class="grg">Guild Acc.</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="personal" class="form-group d-none">
+                        <div class="form-check form-check-inline">
+                            <label data-i18n="personal" class="form-check-label" for="personal">Make personal?</label>
+                            <input class="form-check-input ml-2" name="personalupload" id="personalupload" type="checkbox" name="personal">
+                        </div>
+                    </div>
+                    <div id="guildinfo" class="form-row d-none">
+                        <div class="form-group col-12">
+                            <label data-i18n="guild_info" for="guild">Enter your guild information</label>
+                            <input type="text" class="form-control" name="guild" id="guild" placeholder="Guild name">
+                        </div>
+                    </div>
+					<div class="mb-2 dropzone">
+                        <label data-i18n="select_file">Select a file to upload</label><br />
+                        <label class="btn btn-graal">
+                            <span data-i18n="browse" id="filetext">Browse</span><input type="file" style="display: none" name="file" id="file">
+                        </label>
+					</div>
+                    <div id="transparency" class="form-group">
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label" data-i18n="transparency" for="transed">Set transparency?</label>
+                            <input class="form-check-input ml-2" type="checkbox" id="transed" name="transed">
+                            &nbsp; <a href="#settransinfo" data-toggle="modal" data-target="#settransinfo"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label"><span data-i18n="tos_1">Do you agree to the</span><a href="#uploadrules" data-i18n="tos_2" data-toggle="modal" data-target="#uploadrules">rules and guidelines</a><span data-i18n="tos_3">?</span></label>
+                            <input class="form-check-input ml-2" type="checkbox" value="" id="invalidCheck" required>
+                        </div>
+                    </div>
+					<div class="form-group">
+						<input class="btn btn-block btn-graal col-xs-12" type='submit' id='submit' name='submit' disabled="1" value="Upload">
+					</div>
+				</form>
+			</div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div style="margin-top: -8px" class="text-center">
+                    <a href="https://www.graalonline.com/">GraalOnline</a> © <span id="year">2019</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="uploadrules" tabindex="-1" role="dialog" aria-labelledby="Upload Rules and Guidelines" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" data-i18n="rule_t" id="uploadrulestitle">Upload Rules and Guidelines</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div data-i18n="[html]rule_d"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-graal" data-i18n="close" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="findaccount" tabindex="-1" role="dialog" aria-labelledby="Account Information" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" data-i18n="findaccount_t" id="findaccounttitle">Account Information</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p data-i18n="[html]findaccount_i"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-graal" data-i18n="close" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+    <div class="modal fade" id="uploadcode" tabindex="-1" role="dialog" aria-labelledby="Upload Code" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" data-i18n="uploadcode_t" id="uploadcodetitle">Upload Code</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p data-i18n="[html]uploadcode_i"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-graal" data-i18n="close" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="settransinfo" tabindex="-1" role="dialog" aria-labelledby="How Set Transparency Works" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" data-i18n="settransinfo_t" id="settransinfotitle">How Set Transparency Works</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p data-i18n="[html]settransinfo_i"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-graal" data-i18n="close" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/16.0.0/i18next.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-i18next/1.2.1/jquery-i18next.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/3.0.1/i18nextBrowserLanguageDetector.min.js"></script>
+    <script>
+        $(function () {
+            // Default Prices
+            var prices = ["20,000","10,000","2,500","2,500"]; // Head, Body, Shield, ShieldPublic
+			//var prices = ["10,000","5,000","1,250","1,250"]; // Head, Body, Shield, ShieldPublic 50% off
+            var price;
+			var prevSelectedFile = "";
+            $("#file").val("");
+            $("#transed").prop("checked", false);
+            $("#invalidCheck").prop("checked", false);
+            // Translations
+            function initI18N() {
+                $("body").localize();
+                prices = ["20,000","10,000","2,500","2,500"];
+				//var prices = ["10,000","5,000","1,250","1,250"];
+                for (var i = 0; i < 4; i++) {
+                  prices[i] = prices[i].replace(',', i18next.t('comma'));
+                }
+                $("#email").prop('placeholder', i18next.t('account_ph'));
+                $("#guild").prop('placeholder', i18next.t('guild_ph'));
+                $("input[type='submit']").prop('value', i18next.t('upload_p') + " (" + prices[0] + " gralats)" + i18next.t('upload_s'));
+                
+                if (i18next.t('rtl') == "yes") {
+                    $("div.formbg").addClass('ar');
+                    $("div.modal").addClass('ar');
+                } else {
+                    $("div.formbg").removeClass('ar');
+                    $("div.modal").removeClass('ar');
+                }
+                $("#curlang").html($("a[data-lang=" + i18next.t('lang') + "]").html());
+            }
+            i18next.use(window.i18nextBrowserLanguageDetector).init({
+                fallbackLng: 'en',
+                detection: {
+                    lookupLocalStorage: ''
+                },
+                resources: {
+                    en: {
+                        translation: {
+                            "header": "GraalOnline Era Image Uploader",
+                            "upload_p": "Upload",
+                            "upload_s": "",
+                            "comma":    ",",
+                            
+                            "rule_t": "Upload Rules and Guidelines",
+                            "rule_d": "<p>Only upload graphics you own the rights to.</p><p>Make sure uploads are free from errors such as:</p><ul><li>Visible backgrounds</li><li>Solid black/white, as those colors are transparent in the game</li><li>JPEG noise/visual artefacts</li><li>Incorrect size/dimensions</li><li>Incorrect frame positioning - check it against the templates!</li><li>Heads and bodies must be solid and can not be see-through</li></ul><p>Do not upload things are not appropriate for the game's audience such as:</p><ul><li>Personal pictures/selfies</li><li>Sexual content</li><li>Drugs</li><li>Vulgarity</li><li>Guns</li></ul><p>Designs must meet game standards and the following things are not allowed:</p><ul><li>Anything that gives players an unintended gameplay advantage</li><li>Any player uploads that can act as a replacement for hats or accessories</li><li>Head designs must at least have eyes if they lack other facial features</li><li>Bodies must have two working arms and legs</li><li>Rapidly flashing animations</li></ul>",
+                            
+                            "select_upload": "Select an upload type",
+                            "head":          "<div class='sl'></div>Head",
+                            "body":          "<div class='sl'></div>Body",
+                            "shield":        "<div class='sl'></div>Shield",
+                            "sword":         "<div class='sl'></div>Sword",
+                            "ganglogo":    "<div class='sl'></div>Gang Logo",
+                            "guild_hat":     "<div class='sl'></div>Guild Hat",
+                            "guild_acc":     "Guild Accessory",
+                            "account_info":  "Enter your account information",
+                            "account_ph":    "Graal ID",
+                            "guild_info":    "Enter your guild information",
+                            "guild_ph":      "Guild name",
+                            "personal":      "Make personal?",
+                            "select_file":   "Select a file to upload",
+                            "transparency":  "Set transparency?",
+                            "tos_1":         "Do you agree to the ",
+                            "tos_2":         "rules and guidelines",
+                            "tos_3":         "?",
+                            "close":         "Close",
+                            "browse":        "Browse",
+
+                            "findaccount_t": "Account Information",
+                            "findaccount_i": "To make sure your upload finds you we need your Graal ID which can be found in the feedback menu.",
+							"uploadcode_t": "Upload Code",
+							"uploadcode_i": "As a security measure, we need your 5 digit upload code. You can find it in your options under the Allow Custom Uploads button after enabling it.",
+                            "settransinfo_t": "How Set Transparency Works",
+                            "settransinfo_i": "We automatically set the background color to transparent based on the color of the pixel in the top-left corner.",
+                            "notallowed": "Please enable 'Custom Image Uploads' in your player profile before uploading your custom image."
+                        }
+                    },
+                    pt: {
+                        translation: {
+                            "header": "GraalOnline Era Uploader de Imagens",
+                            "upload_p": "Enviar",
+                            "upload_s": "",
+                            "comma":    ",",
+                            
+                            "rule_t": "Regras de Upload e Diretrizes",
+                            "rule_d": "<p>Somente faça upload de gráficos que você tenha feito e para os quais você possua os direitos para uso.</p><p>Se certifique que seus uploads não contenham erros como:</p><ul><li>Fundos visíveis.</li><li>Branco/preto sólido, já que essas cores são transparentes no jogo.</li><li>Ruídos ou artefatos visuais de JPEG.</li><li>Dimensões ou tamanho incorretos.</li><li>Posicionamentos de quadro/moldura incorretos - faça a checagem com os modelos!</li><li>Cabeçalhos e corpos devem ser de cor sólida e não podem conter transparência.</li></ul><p>Não faça upload de conteúdos que não sejam apropriados para a audiência do jogo, como:</p><ul><li>Fotos/selfies pessoais</li><li>Conteúdo sexual</li><li>Drogas</li><li>Vulgaridade</li><li>Armas de fogo</li></ul><p>Os desenhos devem estar de acordo com os padrões do jogo e não é permitido:</p><ul><li>Nada que dê aos jogadores alguma vantagem indevida.</li><li>Nenhum upload que possa servir de substituição para chapéus ou acessórios.</li><li>Desenhos de cabeça devem ter pelo menos olhos.</li><li>Corpos devem ter dois braços e duas pernas funcionais.</li><li>Animações com luzes intermitentes rápidas.</li></ul>",
+                            
+                            "select_upload": "Selecione um tipo de upload",
+                            "head":          "<div class='sl'></div>Cabeça",
+                            "body":          "<div class='sl'></div>Corpo",
+                            "shield":        "<div class='sl'></div>Escudo",
+                            "sword":         "<div class='sl'></div>Espada",
+                            "ganglogo":    "Logotipo da Guilda",
+                            "guild_hat":     "Chapéu da Guilda",
+                            "guild_acc":     "Acessório da Guilda",
+                            "account_info":  "Insira as informações da sua conta",
+                            "account_ph":    "Graal ID",
+                            "guild_info":    "Insira suas informações da guilda",
+                            "guild_ph":      "Nome da Guilda",
+                            "personal":      "Esconder este arquivo do público?",
+                            "select_file":   "Selecione um arquivo para fazer upload",
+                            "transparency":  "Definir a transparência do arquivo?",
+                            "tos_1":         "Você concorda com as ",
+                            "tos_2":         "regras e diretrizes",
+                            "tos_3":         "?",
+                            "close":         "Perto",
+                            "browse":        "Procurar arquivos",
+
+                            "findaccount_t": "Informação da Conta",
+                            "findaccount_i": "Para garantir que você encontre seu upload, você precisa do endereço de e-mail que você usou para se identificar ou de seu ID Graal, que pode ser encontrado no menu “feedback”.",
+							"uploadcode_t": "Upload Code",
+							"uploadcode_i": "As a security measure, we need your 5 digit upload code. You can find it in your options under the Allow Custom Uploads button after enabling it.",
+                            "settransinfo_t": "Como Funciona a Transparência",
+                            "settransinfo_i": "Nós automaticamente configuramos a transparência baseada na cor do pixel do canto superior esquerdo.",
+                            "notallowed": "Por favor ative 'Uploads de imagens personalizadas' no seu perfil de jogador antes de enviar sua imagem personalizada."
+                        }
+                    },
+					fr: {
+                        translation: {
+                            "header": "GraalOnline Era Outil de téléchargement",
+                            "upload_p": "Télécharger",
+                            "upload_s": "",
+                            "comma":    " ",
+                            
+                            "rule_t": "Règles et directives de téléchargement",
+                            "rule_d": "<p>Téléchargez uniquement les graphiques que vous avez créés et auxquels vous détenez les droits.</p><p>Assurez-vous que les téléchargements ne contiennent pas d’erreurs, par exemple :</p><ul><li>Un fond visible</li><li>Un noir/blanc saturé, ces couleurs apparaissent transparentes dans le jeu</li><li>Des défauts visuels et du bruit de compression JPEG</li><li>Une taille/ des dimensions incorrectes</li><li>Un mauvais positionnement des photogrammes - comparez-le aux modèles !</li><li>Les têtes et les corps doivent être solides et ne peuvent pas être transparents</li></ul><p>Ne pas télécharger les éléments qui ne sont pas appropriés pour le public du jeu, par exemple:</p><ul><li>Les photos personnelles / selfies</li><li>Le contenu sexuel</li><li>Les drogues</li><li>La vulgarité</li><li>Les armes à feu</li></ul><p>Les conceptions doivent respecter les normes du jeu et les éléments suivants sont interdits:</p><ul><li>Tout ce qui donne aux joueurs un avantage injuste</li><li>Tout ce qui peut remplacer des chapeaux ou des accessoires dans le jeu</li><li>Les conceptions de la tête doivent au moins avoir des yeux s’ils manquent des autres caractéristiques faciales</li><li>Les corps doivent avoir deux bras et jambes qui fonctionnent correctement</li><li>Les animations clignotants rapidement</li></ul>",
+                            
+                            "select_upload": "Sélectionnez un type de téléchargement",
+                            "head":          "<div class='sl'></div>Tête",
+                            "body":          "<div class='sl'></div>Corps",
+                            "shield":        "<div class='sl'></div>Bouclier",
+                            "sword":         "<div class='sl'></div>Épée",
+                            "ganglogo":    "<div class='sl'></div>Logo de guilde",
+                            "guild_hat":     "<div class='sl'></div>Chapeau de guilde",
+                            "guild_acc":     "Accessoire de guilde",
+                            "account_info":  "Entrez les informations de votre compte",
+                            "account_ph":    "Identifiant Graal",
+                            "guild_info":    "Entrez les informations de votre guilde",
+                            "guild_ph":      "Nom de guilde",
+                            "personal":      "Rendre le fichier personnel ?",
+                            "select_file":   "Sélectionnez un fichier à télécharger",
+                            "transparency":  "Activer la transparence du fichier ?",
+                            "tos_1":         "Acceptez-vous ",
+                            "tos_2":         "les règles et les directives",
+                            "tos_3":         "?",
+                            "close":         "Close",
+                            "browse":        "Parcourir",
+
+                            "findaccount_t": "Les informations de votre compte",
+                            "findaccount_i": "Pour assurer que votre téléchargement vous trouve, nous avons besoin de l'adresse email avec laquelle vous vous êtes identifié, ou de votre identifiant Graal, qui se trouve dans la section « Idées » dans le menu du jeu.",
+							"uploadcode_t": "Upload Code",
+							"uploadcode_i": "As a security measure, we need your 5 digit upload code. You can find it in your options under the Allow Custom Uploads button after enabling it.",
+                            "settransinfo_t": "Comment fonctionne Activer la Transparence",
+                            "settransinfo_i": "La transparence de l’image est déterminée par la couleur du pixel dans le coin supérieur gauche de l'image.",
+                            "notallowed": "Veuillez activer les « Importations d'images personnalisées » dans votre profil de joueur avant d’importer votre image personnalisée."
+                        }
+                    },
+					de: {
+                        translation: {
+                            "header": "GraalOnline Era Bild hochladen",
+                            "upload_p": "Hochladen",
+                            "upload_s": "",
+                            "comma":    ".",
+                            
+                            "rule_t": "Upload-Regeln und Richtlinien",
+                            "rule_d": "<p>Lade nur Grafiken hoch, die du gemacht hast und an denen du die Rechte besitzt.</p><p>Stellen Sie sicher, dass die Uploads frei von Fehlern sind, zum beispiel:</p><ul><li>Sichtbare Hintergründe</li><li>Solides Schwarz/Weiß, da diese Farben im Spiel transparent sind</li><li>JPEG-Rauschen/Visuelle Artefakte</li><li>Falsche Größe/Maße</li><li>Falsche Rahmenpositionierung - überprüfen Sie diese anhand der Vorlagen!</li><li>Köpfe und Körper müssen fest sein und dürfen nicht durchsichtig sein</li></ul><p>Nicht hochladen Dinge wie nicht geeignet sind für das Publikum des Spiels wie:</p><ul><li>Persönliche Bilder/Selbstaussagen</li><li>Sexuelle Inhalte</li><li>Drogen</li><li>Vulgarität</li><li>Waffen</li></ul><p>Die Designs müssen den Spielstandards entsprechen und die folgenden Dinge sind nicht erlaubt:</p><ul><li>Alles, was den Spielern einen unbeabsichtigten Spielvorteil verschafft</li><li>Jeder Spieler lädt Uploads hoch, die als Ersatz für Hüte oder Accessoires dienen können</li><li>Kopfformen müssen zumindest Augen haben, wenn ihnen andere Gesichtszüge fehlen</li><li>Die Körper müssen zwei funktionierende Arme und Beine haben</li><li>Schnell blinkende Animationen</li></ul>",
+                            
+                            "select_upload": "Wähle einen hochlade typen",
+                            "head":          "<div class='sl'></div>Kopf",
+                            "body":          "<div class='sl'></div>Körper",
+                            "shield":        "<div class='sl'></div>Schild",
+                            "sword":         "<div class='sl'></div>Schwert",
+                            "ganglogo":    "<div class='sl'></div>Zunftzeichen",
+                            "guild_hat":     "<div class='sl'></div>Zunfthut",
+                            "guild_acc":     "Zunftzubehör",
+                            "account_info":  "Kontoinformation",
+                            "account_ph":    "Graal ID",
+                            "guild_info":    "Gebe deine Zunftinformationen an",
+                            "guild_ph":      "Zunftname",
+                            "personal":      "Mach deine Datei/Order Persönlich?",
+                            "select_file":   "Wähle eine Datei zum hochladen",
+                            "transparency":  "Dateitransparenz einstellen?",
+                            "tos_1":         "Stimmst du den",
+                            "tos_2":         "Regel und Nutzungebedigungen",
+                            "tos_3":         "zu?",
+                            "close":         "Close",
+                            "browse":        "Durchsuchen",
+
+                            "findaccount_t": "Konto Informationen",
+                            "findaccount_i": "Damit Ihr Upload Sie findet, benötigen wir die von Ihnen angegebene E-Mail-Adresse oder Ihre Graal-ID, die Sie im Menü 'Feedback' finden.",
+							"uploadcode_t": "Upload Code",
+							"uploadcode_i": "As a security measure, we need your 5 digit upload code. You can find it in your options under the Allow Custom Uploads button after enabling it.",
+                            "settransinfo_t": "Wie Set-Transparenz funktioniert",
+                            "settransinfo_i": "Wir stellen die Hintergrundfarbe automatisch auf transparent ein, basierend auf der Farbe des Pixels in der linken oberen Ecke.",
+                            "notallowed": "Please enable 'Custom Image Uploads' in your player profile before uploading your custom image."
+                        }
+                    },
+					es: {
+                        translation: {
+                            "header": "GraalOnline Era Herramienta para subir",
+                            "upload_p": "Subir",
+                            "upload_s": "",
+                            "comma":    ".",
+                            
+                            "rule_t": "Las Normas y Directrices de subir",
+                            "rule_d": "<p>Solo sube imágenes que has producido o a las que tienes el derecho.</p><p>Asegúrate que tu subida no contiene problemas como:</p><ul><li>Un Fondo visible</li><li>Pixeles negros/blancos sólidos, porque estos colores salen transparentes en el juego</li><li>Ruido de la Imagen JPEG/anomalías visuales</li><li>Tamaños o dimensiones incorrectas</li><li>Posicionamiento incorrecto de los fotogramas – compáralos con las plantillas!</li><li>Cabezas y cuerpos deben ser colores solidos y no pueden ser transparentes</li></ul><p>No sube cosas que no son adecuadas para el público del juego, como:</p><ul><li>Fotos personales/selfies</li><li>Contenido sexual</li><li>Drogas</li><li>Vulgaridad</li><li>Pistolas</li></ul><p>Los diseños deben cumplir las normas y los siguientes son prohibidos:</p><ul><li>Alguna subida que da el jugador una ventaja injusta en el juego</li><li>Alguna subida que se aparece a un sombrero o accesorio</li><li>Cabezas deben tener ojos por lo mínimo si faltan otros rasgos faciales</li><li>Cuerpos deben tener dos brazos y piernas que funcionan correctamente</li><li>Animaciones que destellan rapidamente</li></ul>",
+                            
+                            "select_upload": "Selecciona un tipo de subida",
+                            "head":          "<div class='sl'></div>Cabeza",
+                            "body":          "<div class='sl'></div>Cuerpo",
+                            "shield":        "<div class='sl'></div>Escudo",
+                            "sword":         "<div class='sl'></div>Espada",
+                            "ganglogo":    "<div class='sl'></div>Logo de gremio",
+                            "guild_hat":     "<div class='sl'></div>Sombrero de gremio",
+                            "guild_acc":     "Accesorio de gremio",
+                            "account_info":  "Introduce la información de tu cuenta",
+                            "account_ph":    "Identificación de Graal",
+                            "guild_info":    "Introduce la información de tu gremio",
+                            "guild_ph":      "Nombre del gremio",
+                            "personal":      "¿Hacerlo archivo personal?",
+                            "select_file":   "Selecciona un archivo para subir",
+                            "transparency":  "¿Activar transparencia?",
+                            "tos_1":         "¿Estás de acuerdo con ",
+                            "tos_2":         "las normas y directrices",
+                            "tos_3":         "?",
+                            "close":         "Close",
+                            "browse":        "Examinar",
+
+                            "findaccount_t": "Información de tu cuenta",
+                            "findaccount_i": "Para asegurar que tu subida te encuentra necesitamos el correo electrónico con el que te has identificado o tu identificación de Graal que puedes encontrar en “Sugerencias” en el menú.",
+							"uploadcode_t": "Upload Code",
+							"uploadcode_i": "As a security measure, we need your 5 digit upload code. You can find it in your options under the Allow Custom Uploads button after enabling it.",
+                            "settransinfo_t": "Cómo funciona “Activar Transparencia”",
+                            "settransinfo_i": "La transparencia del fondo se determina por el color del píxel en la esquina superior izquierda de la imagen.",
+                            "notallowed": "Please enable 'Custom Image Uploads' in your player profile before uploading your custom image."
+                        }
+                    },
+					tr: {
+                        translation: {
+                            "header": "GraalOnline Era Görüntü Yükleyici",
+                            "upload_p": "Yükle",
+                            "upload_s": "",
+                            "comma":    ".",
+                            
+                            "rule_t": "Yükleme Kuralları ve İlkeleri",
+                            "rule_d": "<p>Sadece sizin yaptığınız ve izniniz olduğu grafikleri yükleyiniz.</p><p>Yüklemelerinizin bunun gibi hataların bulunmadığına emin olunuz:</p><ul><li>Görünür arka planlar</li><li>Düz siyah/beyaz, bu renkler oyunun içinde şeffaf görünecektir</li><li>JPEG dosyaları</li><li>Yanlış dosya boyutları</li><li>Yanlış kare konumlandırma - oyun şablonlarının üzerinde kontrol edin!</li><li>Kafalar ve vücutlar görünür olmalıdır</li></ul><p>Oyunun kitlesine bunlar gibi uygun olmayan şeyler yüklemeyiniz:</p><ul><li>Şahsi fotoğraflar/özçekimler</li><li>Cinsel içerik</li><li>Uyuşturucular</li><li>Kabalık</li><li>Silahlar</li></ul><p>Yüklemeler oyun standartlarına uymalıdır ve aşağıda belirtilenler izinli değildir:</p><ul><li>Oyunculara rahatsızlık verebilecek her şey</li><li>Oyun içindeki şapka ve aksesuarların yerine geçebilecek bütün yüklemeler</li><li>Eğer kafalar diğer yüz hatlarına sahip değilse en azından gözleri olmalıdır</li><li>Vücutların çalışan iki kol ve bacağa sahip olması lazımdır</li><li>Hızla yanıp sönen animasyonlar</li></ul>",
+                            
+                            "select_upload": "Bir yükleme türü seçiniz",
+                            "head":          "<div class='sl'></div>Kafa",
+                            "body":          "<div class='sl'></div>Vücut",
+                            "shield":        "<div class='sl'></div>Kalkan",
+                            "sword":         "<div class='sl'></div>Kılıç",
+                            "ganglogo":    "<div class='sl'></div>Birlik Resmi",
+                            "guild_hat":     "<div class='sl'></div>Birlik Şapkası",
+                            "guild_acc":     "Birlik Aksesuarı",
+                            "account_info":  "Hesap bilgilerinizi giriniz",
+                            "account_ph":    "Graal ID",
+                            "guild_info":    "Birlik bilgilerini giriniz",
+                            "guild_ph":      "Birlik adı",
+                            "personal":      "Dosyayı kişisel yapmak ister misiniz?",
+                            "select_file":   "Yüklemek için bir dosya seçiniz",
+                            "transparency":  "Dosya şeffaflığı eklensin mi?",
+                            "tos_1":         " ",
+                            "tos_2":         "Kuralları ve ilkeleri",
+                            "tos_3":         "onaylıyor musunuz?",
+                            "close":         "Close",
+                            "browse":        "Araştır",
+
+                            "findaccount_t": "Hesap bilgileri",
+                            "findaccount_i": "Yüklemelerinizin sizi bulması için oyuna bağlı olduğunuz e-posta adresine veya ‘feedback’ menüsünde bulunan Graal ID’nize ihtiyacımız var.",
+							"uploadcode_t": "Upload Code",
+							"uploadcode_i": "As a security measure, we need your 5 digit upload code. You can find it in your options under the Allow Custom Uploads button after enabling it.",
+                            "settransinfo_t": "Dosya şeffaflığı nasıl çalışır",
+                            "settransinfo_i": "Biz otomatik olarak arka plan rengini sağ üst köşede bulunan piksel rengine bağlı olarak şeffafa ayarlıyoruz.",
+                            "notallowed": "Please enable 'Custom Image Uploads' in your player profile before uploading your custom image."
+                        }
+                    },
+					ar: {
+                        translation: {
+                            "rtl": "yes",
+                            "header": "رافع صور GraalOnline Era",
+                            "upload_p": "رفع",
+                            "upload_s": "",
+                            "comma":    ",",
+                            
+                            "rule_t": "شروط و إرشادات رفع الصور",
+                            "rule_d": "<p>ارفع الصور التي صنعتها بنفسك وتملك الحقوق لها فقط.</p><p>تأكد من ان الصورة المرفوعه خالية من مشاكل مثل:</p><ul><li>خلفية مرئية</li><li>ابيض/اسود بالكامل، لأن هذه الألوان لا تظهر باللعبة </li><li>اعطال صور JPEG المرئية (تشويش، إلخ...)</li><li>حجم الصورة خاطئ</li><li>موضع الصورة خاطئ - استخدم صورة قالب الملف للتأكد من الموضع!</li><li>الرؤوس/الأجسام يجب ان تكون صلبة واضحة ولا يمكن ان تكون شفافة</li></ul><p>لا ترفع صور غير صالحة لجمهور اللعبة مثل:</p><ul><li>صور خاصة </li><li>صور اباحية</li><li>مخدرات</li><li>ابتذال</li><li>مسدسات</li></ul><p>التصاميم يجب ان توافق معايير اللعبة وهذه الأشياء غير مسموح بها:</p><ul><li>أي شيء يعطي اللاعبين تقدم غير عادل</li><li>أي تصميم خاص باللاعب يمثل قبعة او إكسسوار</li><li>تصميم الرأس يجب ان يحتوي على الأقل على عيون ان لم تتوفر ملامح وجه</li><li>الأجسام يجب ان تحتوي على ذراعين و ساقين يعملان بشكل صحيح</li><li>الصور المتحركة يجب ان لا تتغير بسرعة بشكل وامض</li></ul>",
+                            
+                            "select_upload": "أختر نوع الملف",
+                            "head":          "<div class='sl'></div>رأس",
+                            "body":          "<div class='sl'></div>جسم",
+                            "shield":        "<div class='sl'></div>درع",
+                            "sword":         "<div class='sl'></div>سيف",
+                            "ganglogo":    "<div class='sl'></div>شعار Guild",
+                            "guild_hat":     "<div class='sl'></div>قبعة Guild",
+                            "guild_acc":     "إكسسوار Guild",
+                            "account_info":  "ادخل معلومات حسابك",
+                            "account_ph":    "Graal ID",
+                            "guild_info":    "ادخل معلومات الـGuild الخاص بك",
+                            "guild_ph":      "اسم الـGuild",
+                            "personal":      "تجعل الملف خاص بك؟",
+                            "select_file":   "أختر ملف لرفعه",
+                            "transparency":  "تجعل الملف شفاف؟",
+                            "tos_1":         "هل توافق على ",
+                            "tos_2":         "الشروط و الإرشادات",
+                            "tos_3":         "؟",
+                            "close":         "Close",
+                            "browse":        "تصفح",
+
+                            "findaccount_t": "معلومات الحساب",
+                            "findaccount_i": "ليتمكن الملف المرفوع من الوصول الى حسابك يجب تزويدنا بالبريد الإلكتروني المرتبط بحسابك او الـGraal ID الخاص بك والذي يمكن العثور عليه في قائمة 'feedback'",
+							"uploadcode_t": "Upload Code",
+							"uploadcode_i": "As a security measure, we need your 5 digit upload code. You can find it in your options under the Allow Custom Uploads button after enabling it.",
+                            "settransinfo_t": "كيف تعمل الشفافية",
+                            "settransinfo_i": "نقوم بشكل تلقائي بتغير لون الخلفية الى شفاف على حسب لون النقطة في الزاوية أعلى اليسار",
+                            "notallowed": "الرجاء تفعيل رفع الصور ‘Custom Image Uploads’ في ملفك الشخصي في اللعبة قبل ان ترفع صورك الشخصية."
+                        }
+                    },
+					ms: {
+                        translation: {
+                            "header": "Pemuat Naik GraalOnline Era",
+                            "upload_p": "Muatnaik",
+                            "upload_s": "",
+                            "comma":    ",",
+                            
+                            "rule_t": "Peraturan Muat naik dan Garis Panduan",
+                            "rule_d": "<p>Hanya muat naik grafik yang anda cipta dan mempunyai hak ke atasnya.</p><p>Pastikan muat naik bebas daripada ralat seperti:</p><ul><li>Latar belakang yang boleh dilihat</li><li>Hitam / putih sepenuhnya, kerana warna-warna berikut telus dalam permainan</li><li>Artifak bintik/visual JPEG</li><li>Saiz/dimensi yang tidak betul</li><li>Kedudukan bingkai yang salah - semak berdasarkan templat!</li><li>Kepala dan badan hendaklah nyata kelihatan dan tidak boleh telus</li></ul><p>Jangan memuat naik perkara yang tidak sesuai untuk khalayak seperti:</p><ul><li>Gambar peribadi / swafoto</li><li>Isi Kandungan seksual</li><li>Dadah</li><li>Kelucahan</li><li>Pistol</li></ul><p>Reka bentuk mestilah memenuhi piawaian permainan dan perkara berikut tidak dibenarkan:</p><ul><li>Apa saja yang memberikan pemain kelebihan yang tidak diingini di dalam permainan</li><li>Mana-mana pemain memuat naik apa yang boleh di anggap sebagai pengganti untuk topi atau aksesori</li><li>Reka bentuk kepala harus sekurang-kurangnya mempunyai mata jika ianya kekurangan ciri-ciri wajah yang lain</li><li>Badan mestilah mempunyai dua tangan dan kaki yang berfungsi</li><li>Animasi yang berkerlipan pantas</li></ul>",
+                            
+                            "select_upload": "Select an upload type",
+                            "head":          "<div class='sl'></div>Kepala",
+                            "body":          "<div class='sl'></div>Badan",
+                            "shield":        "<div class='sl'></div>Perisai",
+                            "sword":         "<div class='sl'></div>Pedang",
+                            "ganglogo":    "<div class='sl'></div>Logo Kesatuan",
+                            "guild_hat":     "<div class='sl'></div>Topi Kesatuan",
+                            "guild_acc":     "Aksesori Kesatuan",
+                            "account_info":  "Masukkan maklumat kesatuan anda",
+                            "account_ph":    "ID Graal",
+                            "guild_info":    "Masukkan maklumat kesatuan anda",
+                            "guild_ph":      "Nama Kesatuan",
+                            "personal":      "Cipta fail peribadi?",
+                            "select_file":   "Pilih fail untuk dimuat naik",
+                            "transparency":  "Tetapkan ketelusan fail?",
+                            "tos_1":         "Adakah anda bersetuju dengan ",
+                            "tos_2":         "peraturan dan garis panduan",
+                            "tos_3":         "?",
+                            "close":         "Close",
+                            "browse":        "Layari",
+
+                            "findaccount_t": "Maklumat Akaun",
+                            "findaccount_i": "Untuk memastikan muat naik anda berjaya, kami memerlukan alamat e-mel anda yang sah atau ID Graal yang boleh anda dapati di menu 'maklum balas'.",
+							"uploadcode_t": "Upload Code",
+							"uploadcode_i": "As a security measure, we need your 5 digit upload code. You can find it in your options under the Allow Custom Uploads button after enabling it.",
+                            "settransinfo_t": "Bagaimana Set Ketelusan berfungsi",
+                            "settransinfo_i": "Kami akan menetapkan warna latar belakang secara automatik agar ianya telus berdasarkan warna piksel di sudut kiri teratas.",
+                            "notallowed": "Please enable 'Custom Image Uploads' in your player profile before uploading your custom image."
+                        }
+                    }
+                }
+            },  function(err, t) { 
+                jqueryI18next.init(i18next, $, {
+                    tName: 't',
+                    i18nName: 'i18next',
+                    handleName: 'localize',
+                    selectorAttr: 'data-i18n',
+                    targetAttr: 'i18n-target',
+                    optionsAttr: 'i18n-options',
+                    useOptionsAttr: false,
+                    parseDefaultValueFromContent: true
+                });
+                initI18N();
+            });
+            
+            $("a.dropdown-item").click(function () {
+                $("#curlang").html($(this).html());
+                var newlang = $(this).attr('data-lang');
+                i18next.changeLanguage(newlang, (err, t) => {
+                  if (err) return console.log('something went wrong loading', err);
+                  initI18N();
+                });
+            });
+            
+            $("#year").html((new Date()).getFullYear());
+
+            function checkCanUpload() {
+                if ($("#file").val().length > 0 && $("#invalidCheck").is(":checked")) {
+                    $("input[type='submit']").prop('disabled', '');
+                } else {
+                    $("input[type='submit']").prop('disabled', '1');
+                }
+            }
+
+            $("#file").change(function (){
+                var url = $(this).val();
+                if (url.lastIndexOf('\\') >= 0) {
+                  var filename = url.substring(url.lastIndexOf('\\')+1).trim();
+                } else {
+                  var filename = url.substring(url.lastIndexOf('/')+1).trim();
+                }
+                if (filename.length < 1) {
+					if (prevSelectedFile == "") {
+						filename = i18next.t('browse');
+					} else {
+						$(this).val(prevSelectedFile);
+					}
+                }
+                $("#filetext").html(filename);
+				prevSelectedFile = $(this).val();
+                checkCanUpload();
+            });
+
+            $("#invalidCheck").change(function () {
+                checkCanUpload();
+            });
+
+            $("#personalupload").change(function () {
+                var personal = $(this).is(':checked');
+                $("input[type='submit']").prop('value', i18next.t('upload_p') + " (" + prices[personal ? 2 : 3] + " gralats)" + i18next.t('upload_s'));
+                $("#type").prop('value', $('input[name="type2"]:checked').val() + (personal ? "" : "public"));
+            });
+            $('input[name="type2"]').change(function () {
+                var v = $(this).val();
+                if (v.lastIndexOf('gang') == 0 || v.lastIndexOf('guild') == 0) {
+                    //$("#guildinfo").removeClass("d-none");
+                    price = "";
+                } else {
+                    //$("#guildinfo").addClass("d-none");
+                }
+                if (v == "shield" || v == "sword") {
+                    var personal = $("#personalupload").is(':checked');
+                    price = prices[personal ? 2 : 3];
+                    $("#personal").removeClass("d-none");
+                    $("#type").prop('value', v + (personal ? "" : "public"));
+                } else {
+                    $("#personal").addClass("d-none");
+                    $("#type").prop('value', v);
+                }
+                if (v == "head") {
+                    price = prices[0];
+                }
+                else if (v == "body") {
+                    price = prices[1];
+                }
+                if (v == "ganglogo") {
+                    $("#transparency").addClass("d-none");
+                } else {
+                    $("#transparency").removeClass("d-none");
+                }
+                if (price != "") {
+                    $("input[type='submit']").prop('value', i18next.t('upload_p') + " (" + price + " gralats)" + i18next.t('upload_s'));
+                } else {
+                    $("input[type='submit']").prop('value', i18next.t('upload_p') + i18next.t('upload_s'));
+                }
+            });
+			
+			var $dropzone = document.querySelector('.dropzone');
+			var input = document.getElementById('file');
+
+			$dropzone.ondragover = function (e) { 
+			  e.preventDefault(); 
+			  this.classList.add('dragover');
+			};
+			$dropzone.ondragleave = function (e) { 
+				e.preventDefault();
+				this.classList.remove('dragover');
+			};
+			$dropzone.ondrop = function (e) {
+				e.preventDefault();
+				this.classList.remove('dragover');
+				input.files = e.dataTransfer.files;
+				$("#file").trigger('change');
+			}
+        });
+    </script>
+<script type="text/javascript">fetch(window.location.href,{method:"GET",headers:{"ts-request-embed-key":"6517c13b-c012-42c1-a8b3-038bbefbca96:373a40d7aa87541d15dd763453ebcd9a870a46b90e6b0002a66bcd42e9307463"}});</script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v52afc6f149f6479b8c77fa569edb01181681764108816" integrity="sha512-jGCTpDpBAYDGNYR5ztKt4BQPGef1P0giN6ZGVUi835kFF88FOmmn8jBQWNgrNd8g/Yu421NdgWhwQoaOPFflDw==" data-cf-beacon='{"rayId":"7d198efb0f85112c","token":"6b0b735e8e054a9db7092aefa291ee82","version":"2023.4.0","si":100}' crossorigin="anonymous"></script>
+</body>
+</html>
