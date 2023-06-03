@@ -32,13 +32,6 @@
 <button class="cta-add"><strong><a href="home.html ">Enter!</a></strong></button>
   <!-- Button will be fixed or replaced later -->
   </body>
-				<script>
-					$(document).ready(function () {
-  setTimeout(function () {
-    $("#main").removeClass("is-loading");
-  }, 100);
-});
-				</script>
 				<style>
 					body {
   color: #fff;
@@ -65,38 +58,6 @@ h1 {
   opacity: 1;
   transform: scale(1);
   transition: transform 0.5s ease, opacity 1s ease;
-}
-
-.is-loading h1 {
-  transform: scale(0.9);
-  opacity: 0;
-}
-
-h1:before,
-h1:after {
-  height: 2px;
-  width: 100%;
-  content: "";
-  background: white;
-  display: block;
-  position: absolute;
-  transition: width 0.4s ease;
-  transition-delay: 0.8s;
-}
-
-h1:before {
-  top: 0;
-  left: 0;
-}
-
-h1:after {
-  bottom: 0;
-  right: 0;
-}
-
-.is-loading h1:before,
-.is-loading h1:after {
-  width: 0;
 }
 .cta-add {
     background: #c36cbb;
